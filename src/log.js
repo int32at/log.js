@@ -6,7 +6,7 @@
     self.appender = log.appender || {};
     self.format = "[{date}][{level}] {text}";
 
-    self.currentAppender = log.appender.consoleAppender;
+    self.currentAppender = undefined;
 
     var formatText = function(text, level) {
       var date = new Date().toLocaleString();
@@ -19,13 +19,19 @@
       return formattedText;
     };
 
+    var init = function() {
+      self.currentAppender = log.appender.consoleAppender;
+      self.currentAppender.init();
+    }();
+
     return {
 
       appender : self.appender,
       format : self.format,
 
-      init : function(appender) {
+      init : function(appender, args) {
         self.currentAppender = appender;
+        self.currentAppender.init(args);
       },
 
       info : function(text) {

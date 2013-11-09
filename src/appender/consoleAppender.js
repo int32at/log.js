@@ -4,7 +4,15 @@
   
   log.appender.consoleAppender = function() {
     
+    var self = this;
+    self.args = undefined;
+
     return {
+
+      init : function(args) {
+        self.args = args;
+      },
+
       info : function(text) {
         console.info(text);
       },
