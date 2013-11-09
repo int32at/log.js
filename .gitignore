@@ -1,0 +1,17 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.grunt
+dist
+pids
+logs
+results
+coverage
+node_modules
+npm-debug.log
+_SpecRunner.html
