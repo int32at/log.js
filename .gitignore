@@ -7,7 +7,6 @@ lib-cov
 *.pid
 *.gz
 *.grunt
-dist
 pids
 logs
 results
