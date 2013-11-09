@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
 		concat: {
 			scripts: {
-				src: ['src/*.js', 'lib/jquery.min.js'],
+				src: ['src/*/*.js', 'src/*.js', 'lib/jquery.min.js'],
 				dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.js'
 			}
 		},
