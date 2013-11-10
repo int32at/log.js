@@ -6,7 +6,12 @@
 </head>
 <body>
 	<script>
-		log.init(log.appender.toastrAppender, null, function() { 
+		//toaster options
+		var options = {
+			positionClass: "toast-top-left"
+		};
+
+		log.init(log.appender.toastrAppender, options, function() { 
 			log.info(1); 
 		});
 	</script>

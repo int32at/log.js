@@ -65,7 +65,7 @@
   }();
 }());
 (function() {
-  log = window.log || {}; 
+  log = window.log || {};
   log.appender = log.appender || {};
   
   log.appender.toastrAppender = function() {
@@ -96,9 +96,10 @@
       init : function(args, callback) {
         self.args = args;
 
-        loadResource("link", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css");
+        loadResource("link", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.min.css");
 
-        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js", function() {
+        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.min.js", function() {
+          toastr.options = self.args;
           log.common.executeCallback(callback);
         });
       },
