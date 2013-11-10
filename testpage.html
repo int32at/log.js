@@ -6,14 +6,12 @@
 </head>
 <body>
 	<script>
-		//toaster options
 		var options = {
-			positionClass: "toast-top-left"
+			url : "https://dev.int32.at/log.js/examples/serviceAppender/data.php"
 		};
 
-		log.init(log.appender.toastrAppender, options, function() { 
-			log.info(1); 
-		});
+		log.init(log.appender.serviceAppender, options);
+		log.info("this is a sample message"); 
 	</script>
 </body>
 </html>
