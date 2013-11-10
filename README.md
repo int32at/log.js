@@ -86,7 +86,7 @@ log.info("this is a sample message");
 ```
 
 In this case, the `data.php` will save the given POST parameter (**log_text**) to logfile.txt. You find the example 
-[here](/examples/serviceAppender)
+[here](/examples/serviceAppender).
 
 #####Using the toastrAppender
 Usually `log.js` does not need jQuery or any other 3rd party plugins. However, if you want to use 
