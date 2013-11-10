@@ -65,6 +65,7 @@ Following appenders are supported out of the box by `log.js`:
 - `log.appender.consoleAppender`: logs to the browsers console.
 - `log.appender.alertAppender`: logs by using the browsers alert function.
 - `log.appender.toastrAppender`: logs by using [toastr](https://github.com/CodeSeven/toastr).
+- `log.appender.serviceAppender`: logs to a web service using POST.
 
 #####Using the toastrAppender
 Usually `log.js` does not need jQuery or any other 3rd party plugins. However, if you want to use 
