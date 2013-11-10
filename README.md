@@ -63,7 +63,7 @@ log.debug(console);
 - **ERROR**: argh, something went totally wrong!
 
 
-For example, you only want to log methods of level `WARN` and above, you could use the following example:
+For example, you only want to log methods of level **`WARN` and above**, you could use the following example:
 ```js
 //set the log level to WARN and above
 log.level("WARN");
