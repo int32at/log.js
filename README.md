@@ -67,6 +67,27 @@ Following appenders are supported out of the box by `log.js`:
 - `log.appender.toastrAppender`: logs by using [toastr](https://github.com/CodeSeven/toastr).
 - `log.appender.serviceAppender`: logs to a web service using POST.
 
+#####Using the serviceAppender
+The `log.appender.serviceAppender` publishes all logged events to a web service using POST. jQuery is required for it
+to work, so do not forget to reference it before initializing this `log.js` with this appender.
+
+```js
+//url parameter is required
+//points to the web service
+var options = {
+  url : "https://dev.int32.at/log.js/examples/serviceAppender/data.php"
+};
+
+//initialize log.js
+log.init(log.appender.serviceAppender, options);
+
+//sent message to web service
+log.info("this is a sample message"); 
+```
+
+In this case, the `data.php` will save the given POST parameter (**log_text**) to logfile.txt. You find the example 
+[here](/examples/serviceAppender)
+
 #####Using the toastrAppender
 Usually `log.js` does not need jQuery or any other 3rd party plugins. However, if you want to use 
 `log.appender.toastrAppender` you need to reference jQuery before initializing `log.js`, because it will load
