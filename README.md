@@ -7,7 +7,7 @@ A JavaScript Logging Framework
 
 ###Introduction
 `log.js` is a simple, easy to use and lightweight (3.5KB minified) logging framework for JavaScript. It includes several
-appenders that you can use right away. Check out this [fiddle](http://jsfiddle.net/BF3qh/) to see it in action!
+appenders that you can use right away. Check out this [fiddle](http://jsfiddle.net/BF3qh/1/) to see it in action!
 
 ###Installation & Build
 1.  Install node.js
