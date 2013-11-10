@@ -4,4 +4,11 @@ describe('log.js object tests', function() {
 		expect(log).not.toBeUndefined();
 	});
 
+	it('should be possible to use the log.appender object', function() {
+		expect(log).not.toBeUndefined();
+	});
+
+	it('should be possible to use the log.common object', function() {
+		expect(log).not.toBeUndefined();
+	});
 });
