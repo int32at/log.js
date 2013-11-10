@@ -216,3 +216,57 @@ Now you just have to initialize `log.js` with your newly created appender:
 log.init(myCustomAppender);
 log.warn("this is a warning message");
 ```
+
+####Advanced Logging Scenarios
+Of course, with `log.js` it is also possible to create your own logger instance, so you can use multiple loggers
+across your application. This might be usefull when you want to create a logger for each level (with different appenders)
+so you can log debug messages to a web service and display warning messages to the user in a neat way! Consider
+the following example:
+
+```js
+//set up service appender logger
+var config = { url : "https://site/service.php" };
+var myWebServiceLogger = log.get("MyWebServiceLogger");
+myWebServiceLogger.init(log.appender.serviceAppender, config);
+
+var myToastrLogger = log.get("MyToastrLogger");
+myToastrLogger.init(log.appender.toastrAppender, null, function() {
+
+  try {
+    alerrrrrt("Argh this didnt work!");
+  }
+  catch(err) {
+    //sent the error to the web server
+    myWebServiceLogger.error(err);
+    
+    //display a nice message to the user
+    myToastrLogger.error("Something went wrong. Please try again!");
+  }
+  
+});
+```
+Or with different levels:
+```js
+//set up alert logger
+var myAlertLogger = log.get("MyAlertLogger");
+myAlertLogger.init(log.appender.alertAppender);
+
+//set up console logger
+var myConsoleLogger = log.get("MyConsoleLogger");
+myConsoleLogger.init(log.appender.consoleAppender);
+
+//will display all logs > WARN level as alerts
+myAlertLogger.level("ERROR");
+
+//will log all logs > DEBUG level in console
+myConsoleLogger.level("DEBUG");
+
+//will be logged
+myConsoleLogger.info("this is a info message");
+
+//will not be logged
+myAlertLogger.warn("will not be displayed");
+
+//will be logged
+myAlertLogger.error("will be displayed");
+```
