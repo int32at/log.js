@@ -25,23 +25,60 @@ you can start using the `log` object like this:
 log.warn("this is a warning message");
 ```
 
-`log.js` supports following log levels:
+The following log levels are supported:
+- `log.info`: info message
+- `log.debug`: debug message
+- `log.warn`: warning message
+- `log.error`: error message
 
-`log.info`: info message
-`log.debug`: debug message
-`log.warn`: warning message
-`log.error`: error message
+*Of course `log.js` not only supports logging text (string) messages - you can also pass in objects into all methods*
+*and they will be logged in easy-to-read JSON. See the follwing code:*
+
+```js
+//log the console object
+log.debug(console);
+
+//will print the following:
+//[11/10/2013 8:25:13 PM][DEBUG] 
+//{
+//  "memory": {
+//    "jsHeapSizeLimit": 793000000,
+//    "usedJSHeapSize": 10000000,
+//    "totalJSHeapSize": 10600000
+//  },
+// "_commandLineAPI": {}
+//} 
+```
 
 ####Formatting
 
+It is possible to use formatting within all log methods aswell. Example:
+
+```js
+//prints [11/10/2013 8:41:44 PM][WARN] hello world 
+log.warn("hello {0}", "world")
+
+//[11/10/2013 8:43:58 PM][WARN] hello world, this is log.js 
+log.warn("hello {0}, this is {1}", "world", "log.js");
+```
+
 The default log message format is `[{date}][{level}] {text}`. You can easily configure the message format by
-using the `log.format` property.
+using the `log.format` property. The default format is:
+
+```js
+//default format [{date}][{level}] {text}
+log.format = "[{date}][{level}] {text}";
+
+//[11/10/2013 6:26:46 PM][WARN] this is a warning message
+log.warn("this is a warning message");
+```
+
+But it can easily be changed like this:
 
 ```js
 //set the default format
 log.format = "{level} - {text}";
 
-//alerts the message
 //WARN - this is a warning message
 log.warn("this is a warning message");
 ```
