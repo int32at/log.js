@@ -174,40 +174,37 @@ log.init(log.appender.toastrAppender, toastrOptions, function() {
 If you do not find an appender that fits your needs you can simply write your own! Start with the following template:
 
 ```js
-(function() {
-  myCustomerAppender = function() {
+var myCustomerAppender = function() {
+  
+  var self = this;
+  self.args = undefined;
+
+  return {
+    init : function(args) {
+      self.args = args;
+    },
     
-    var self = this;
-    self.args = undefined;
-
-    return {
-
-      init : function(args) {
-        self.args = args;
-      },
-
-      log : function(text) {
-        alert(text);
-      },
-
-      info : function(text) {
-        alert(text);
-      },
-
-      warn : function(text) {
-        alert(text);
-      },
-
-      error : function(text) {
-        alert(text);
-      },
-
-      debug : function(text) {
-        alert(text);
-      }
-    };
-  }();
-}());
+    log : function(text) {
+      alert(text);
+    },
+    
+    info : function(text) {
+      alert(text);
+    },
+    
+    warn : function(text) {
+      alert(text);
+    },
+    
+    error : function(text) {
+      alert(text);
+    },
+    
+    debug : function(text) {
+      alert(text);
+    }
+  };
+}();
 ```
 
 Now you just have to initialize `log.js` with your newly created appender:
