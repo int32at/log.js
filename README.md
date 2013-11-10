@@ -27,7 +27,7 @@ you can start using the `log` object like this:
 log.warn("this is a warning message");
 ```
 
-The following log levels are supported:
+The following log methods are supported:
 - `log.log`: log message
 - `log.info`: info message
 - `log.debug`: debug message
@@ -51,6 +51,27 @@ log.debug(console);
 //  },
 // "_commandLineAPI": {}
 //} 
+```
+
+####Log Levels
+`log.js` also provides a method to make your logging more specific. Following levels are supported:
+- **OFF**: disables all logging
+- **DEBUG**: debug messages, usefull for tracing issues
+- **LOG**: normal log message
+- **INFO**: informational message, usefull for displaying user info
+- **WARN**: warning message, something is not working correctly
+- **ERROR**: argh, something went totally wrong!
+
+
+For example, you only want to log methods of level `WARN` and above, you could use the following example:
+```js
+//set the log level to WARN and above
+log.level("WARN");
+
+log.info("this message will not be sent to the log");
+
+log.warn("this one will, however.");
+log.error("this one too!");
 ```
 
 ####Formatting
