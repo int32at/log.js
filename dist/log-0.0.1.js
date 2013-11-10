@@ -155,6 +155,24 @@
             if (typeof callback !== "undefined" && callback.length > 0)
             executeFunctionByName(callback, window, args);
         }
+      },
+
+      loadResource : function(type, url) {
+        var head = document.getElementsByTagName("head")[0];
+
+        var element = document.createElement(type);
+
+        if(type === "script") {
+          element.src = url;
+          element.type = "text/javascript";
+        }
+        if(type === "link") {
+          element.href = url;
+          element.type = "text/css";
+          element.rel = "stylesheet";
+        }
+
+        head.appendChild(element);
       }
     };
   }();
