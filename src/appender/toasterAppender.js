@@ -27,14 +27,14 @@
 
     return {
 
-      init : function(args) {
+      init : function(args, callback) {
         self.args = args;
 
-        loadResource("script", "http://code.jquery.com/jquery-1.10.2.min.js");
-        loadResource("script", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js");
         loadResource("link", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css");
 
-        //toastr.options = self.args;
+        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js", function() {
+          log.common.executeCallback(callback);
+        });
       },
 
       info : function(text) {

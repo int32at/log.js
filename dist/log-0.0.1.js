@@ -93,14 +93,14 @@
 
     return {
 
-      init : function(args) {
+      init : function(args, callback) {
         self.args = args;
 
-        loadResource("script", "http://code.jquery.com/jquery-1.10.2.min.js");
-        loadResource("script", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js");
         loadResource("link", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css");
 
-        //toastr.options = self.args;
+        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js", function() {
+          log.common.executeCallback(callback);
+        });
       },
 
       info : function(text) {
@@ -121,12 +121,50 @@
     };
   }();
 }());
+(function() {
+  log = window.log || {};
+  
+  log.common = function() {
+    
+    var self = this;
+
+    var executeFunctionByName = function(callback, context/*, args*/) {
+      var args = null;
+      if (arguments.length == 3) args = arguments[2];
+      var namespaces = callback.split(".");
+      var func = namespaces.pop();
+      for (var i = 0; i < namespaces.length; i++) {
+          context = context[namespaces[i]];
+      }
+      var params = [];
+      params.push(args);
+      return context[func].apply(context, params);
+    };
+
+    return {
+
+      executeCallback : function(callback) {
+        var args = null;
+        if (arguments.length == 2) args = arguments[1];
+        if(typeof(callback) == 'function') {
+            var params = [];
+            params.push(args);
+            callback.apply(this, params);
+        } else {
+            if (typeof callback !== "undefined" && callback.length > 0)
+            executeFunctionByName(callback, window, args);
+        }
+      }
+    };
+  }();
+}());
 (function () {
   log = window.log || {};
   
   log = function() {
     var self = this;
     self.appender = log.appender || {};
+    self.common = log.common || {};
     self.format = "[{date}][{level}] {text}";
 
     self.currentAppender = undefined;
@@ -151,10 +189,11 @@
 
       appender : self.appender,
       format : self.format,
+      common : self.common,
 
-      init : function(appender, args) {
+      init : function(appender, args, callback) {
         self.currentAppender = appender;
-        self.currentAppender.init(args);
+        self.currentAppender.init(args, callback);
       },
 
       info : function(text) {

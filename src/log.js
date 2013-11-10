@@ -4,6 +4,7 @@
   log = function() {
     var self = this;
     self.appender = log.appender || {};
+    self.common = log.common || {};
     self.format = "[{date}][{level}] {text}";
 
     self.currentAppender = undefined;
@@ -28,10 +29,11 @@
 
       appender : self.appender,
       format : self.format,
+      common : self.common,
 
-      init : function(appender, args) {
+      init : function(appender, args, callback) {
         self.currentAppender = appender;
-        self.currentAppender.init(args);
+        self.currentAppender.init(args, callback);
       },
 
       info : function(text) {

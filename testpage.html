@@ -2,7 +2,13 @@
 <head>
 	<title>Test Page</title>
 	<script src="dist/log-0.0.1.js" type="text/javascript"></script>
+	<script src="lib/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
+	<script>
+		log.init(log.appender.toastrAppender, null, function() { 
+			log.info(1); 
+		});
+	</script>
 </body>
 </html>
