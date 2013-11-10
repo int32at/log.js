@@ -28,6 +28,7 @@ log.warn("this is a warning message");
 ```
 
 The following log levels are supported:
+- `log.log`: log message
 - `log.info`: info message
 - `log.debug`: debug message
 - `log.warn`: warning message
@@ -162,6 +163,10 @@ If you do not find an appender that fits your needs you can simply write your ow
 
       init : function(args) {
         self.args = args;
+      },
+
+      log : function(text) {
+        alert(text);
       },
 
       info : function(text) {

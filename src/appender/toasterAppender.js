@@ -38,6 +38,10 @@
         });
       },
 
+      log : function(text) {
+        toastr.info(text);
+      },
+
       info : function(text) {
         toastr.info(text);
       },

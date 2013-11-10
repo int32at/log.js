@@ -25,6 +25,10 @@
         self.args = args;
       },
 
+      log : function(text) {
+        send(text);
+      },
+
       info : function(text) {
         send(text);
       },

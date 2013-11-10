@@ -13,6 +13,10 @@
         self.args = args;
       },
 
+      log : function(text) {
+        alert(text);
+      },
+
       info : function(text) {
         alert(text);
       },
@@ -44,6 +48,10 @@
 
       init : function(args) {
         self.args = args;
+      },
+
+      log : function(text) {
+        console.log(text);
       },
 
       info : function(text) {
@@ -89,6 +97,10 @@
 
       init : function(args) {
         self.args = args;
+      },
+
+      log : function(text) {
+        send(text);
       },
 
       info : function(text) {
@@ -147,6 +159,10 @@
           toastr.options = self.args;
           log.common.executeCallback(callback);
         });
+      },
+
+      log : function(text) {
+        toastr.info(text);
       },
 
       info : function(text) {
@@ -292,6 +308,10 @@
       init : function(appender, args, callback) {
         self.currentAppender = appender;
         self.currentAppender.init(args, callback);
+      },
+
+      log : function(text) {
+        self.currentAppender.log(formatText(text, "LOG", arguments));
       },
 
       info : function(text) {

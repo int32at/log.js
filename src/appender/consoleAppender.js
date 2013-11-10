@@ -13,6 +13,10 @@
         self.args = args;
       },
 
+      log : function(text) {
+        console.log(text);
+      },
+
       info : function(text) {
         console.info(text);
       },

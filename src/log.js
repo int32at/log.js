@@ -42,6 +42,10 @@
         self.currentAppender.init(args, callback);
       },
 
+      log : function(text) {
+        self.currentAppender.log(formatText(text, "LOG", arguments));
+      },
+
       info : function(text) {
         self.currentAppender.info(formatText(text, "INFO", arguments));
       },
