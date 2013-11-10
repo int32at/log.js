@@ -18,7 +18,7 @@ appenders that you can use right away. Check out this [fiddle](http://jsfiddle.n
 
 ###Usage & Configuration 
 
-Simply reference [log.js](dist/log-0.0.1.min.js) in your project and you are ready to go. Once you did this,
+Simply reference [log.js](dist) in your project and you are ready to go. Once you did this,
 you can start using the `log` object like this:
 
 ```js
