@@ -237,10 +237,15 @@
       var date = new Date().toLocaleString();
 
       var formattedText = log.format;
+
+      //format object as json to make it readable
+      if(typeof text !== "string") {
+        text = "\n\r" + JSON.stringify(text, null, 2);
+      }
+
       formattedText = formattedText.replace("{date}", date);
       formattedText = formattedText.replace("{level}", level);
       formattedText = formattedText.replace("{text}", text);
-
       return formattedText;
     };
 
