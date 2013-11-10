@@ -218,6 +218,17 @@
         }
 
         head.appendChild(element);
+      },
+
+      format : function (format, args) {
+        args = Array.prototype.slice.call(args, 1);
+        
+        var sprintf = function (match, number) {
+          return number in args ? args[number] : match;
+        };
+
+        var sprintfRegex = /\{(\d+)\}/g;
+        return format.replace(sprintfRegex, sprintf);
       }
     };
   }();
@@ -233,7 +244,7 @@
 
     self.currentAppender = undefined;
 
-    var formatText = function(text, level) {
+    var formatText = function(text, level, args) {
       var date = new Date().toLocaleString();
 
       var formattedText = log.format;
@@ -243,6 +254,7 @@
         text = "\n\r" + JSON.stringify(text, null, 2);
       }
 
+      text = log.common.format(text, args);
       formattedText = formattedText.replace("{date}", date);
       formattedText = formattedText.replace("{level}", level);
       formattedText = formattedText.replace("{text}", text);
@@ -266,19 +278,19 @@
       },
 
       info : function(text) {
-        self.currentAppender.info(formatText(text, "INFO"));
+        self.currentAppender.info(formatText(text, "INFO", arguments));
       },
 
       warn : function(text) {
-        self.currentAppender.warn(formatText(text, "WARN"));
+        self.currentAppender.warn(formatText(text, "WARN", arguments));
       },
 
       error : function(text) {
-        self.currentAppender.error(formatText(text, "ERROR"));
+        self.currentAppender.error(formatText(text, "ERROR", arguments));
       },
 
       debug : function(text) {
-        self.currentAppender.debug(formatText(text, "DEBUG"));
+        self.currentAppender.debug(formatText(text, "DEBUG", arguments));
       }
     };
   }();

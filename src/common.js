@@ -49,6 +49,17 @@
         }
 
         head.appendChild(element);
+      },
+
+      format : function (format, args) {
+        args = Array.prototype.slice.call(args, 1);
+        
+        var sprintf = function (match, number) {
+          return number in args ? args[number] : match;
+        };
+
+        var sprintfRegex = /\{(\d+)\}/g;
+        return format.replace(sprintfRegex, sprintf);
       }
     };
   }();
