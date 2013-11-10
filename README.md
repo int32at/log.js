@@ -52,14 +52,33 @@ log.debug(console);
 
 ####Formatting
 
+It is possible to use formatting within all log methods aswell. Example:
+
+```js
+//prints [11/10/2013 8:41:44 PM][WARN] hello world 
+log.warn("hello {0}", "world")
+
+//[11/10/2013 8:43:58 PM][WARN] hello world, this is log.js 
+log.warn("hello {0}, this is {1}", "world", "log.js");
+```
+
 The default log message format is `[{date}][{level}] {text}`. You can easily configure the message format by
-using the `log.format` property.
+using the `log.format` property. The default format is:
+
+```js
+//default format [{date}][{level}] {text}
+log.format = "[{date}][{level}] {text}";
+
+//[11/10/2013 6:26:46 PM][WARN] this is a warning message
+log.warn("this is a warning message");
+```
+
+But it can easily be changed like this:
 
 ```js
 //set the default format
 log.format = "{level} - {text}";
 
-//alerts the message
 //WARN - this is a warning message
 log.warn("this is a warning message");
 ```
