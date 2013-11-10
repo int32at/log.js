@@ -60,5 +60,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.registerTask("test", ["jasmine"]);
 	grunt.registerTask('default', ['concat', 'uglify', 'jasmine']);
 };
