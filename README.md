@@ -7,7 +7,7 @@ A JavaScript Logging Framework
 
 ###Introduction
 `log.js` is a simple, easy to use and lightweight (3.5KB minified) logging framework for JavaScript. It includes several
-appenders that you can use right away. Check out this [fiddle](http://jsfiddle.net/BF3qh/) to see it in action!
+appenders that you can use right away. Check out this [fiddle](http://jsfiddle.net/BF3qh/1/) to see it in action!
 
 ###Installation & Build
 1.  Install node.js
@@ -18,7 +18,7 @@ appenders that you can use right away. Check out this [fiddle](http://jsfiddle.n
 
 ###Usage & Configuration 
 
-Simply reference [log.js](dist/log-0.0.1.min.js) in your project and you are ready to go. Once you did this,
+Simply reference [log.js](dist) in your project and you are ready to go. Once you did this,
 you can start using the `log` object like this:
 
 ```js
@@ -63,7 +63,7 @@ log.debug(console);
 - **ERROR**: argh, something went totally wrong!
 
 
-For example, you only want to log methods of level `WARN` and above, you could use the following example:
+For example, you only want to log methods of level **`WARN` and above**, you could use the following example:
 ```js
 //set the log level to WARN and above
 log.level("WARN");
@@ -174,40 +174,37 @@ log.init(log.appender.toastrAppender, toastrOptions, function() {
 If you do not find an appender that fits your needs you can simply write your own! Start with the following template:
 
 ```js
-(function() {
-  myCustomerAppender = function() {
+var myCustomerAppender = function() {
+  
+  var self = this;
+  self.args = undefined;
+
+  return {
+    init : function(args) {
+      self.args = args;
+    },
     
-    var self = this;
-    self.args = undefined;
-
-    return {
-
-      init : function(args) {
-        self.args = args;
-      },
-
-      log : function(text) {
-        alert(text);
-      },
-
-      info : function(text) {
-        alert(text);
-      },
-
-      warn : function(text) {
-        alert(text);
-      },
-
-      error : function(text) {
-        alert(text);
-      },
-
-      debug : function(text) {
-        alert(text);
-      }
-    };
-  }();
-}());
+    log : function(text) {
+      alert(text);
+    },
+    
+    info : function(text) {
+      alert(text);
+    },
+    
+    warn : function(text) {
+      alert(text);
+    },
+    
+    error : function(text) {
+      alert(text);
+    },
+    
+    debug : function(text) {
+      alert(text);
+    }
+  };
+}();
 ```
 
 Now you just have to initialize `log.js` with your newly created appender:
