@@ -1,8 +1,8 @@
 (function() {
-  log = window.log || {}; 
-  log.appender = log.appender || {};
+  logger = window.logger || {}; 
+  logger.appender = logger.appender || {};
   
-  log.appender.alertAppender = function() {
+  logger.appender.alertAppender = function() {
     
     var self = this;
     self.args = undefined;
