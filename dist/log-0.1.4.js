@@ -268,7 +268,7 @@ var logger = (function(name, appender){
     var _args;
 
     var _sendMessage = function(text, color) {
-      var status = SP.UI.Status.addStatus(_args.name, text);
+      var status = SP.UI.Status.addStatus(_args.loggerName, text);
       SP.UI.Status.setStatusPriColor(status, color);
       setTimeout(function () { SP.UI.Status.removeStatus(status); }, _args.timeout);
     };
