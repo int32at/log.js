@@ -112,6 +112,12 @@ var logger = (function(name, appender){
 
       init : function(appender, args, callback) {
         _currentAppender = appender;
+
+        if(typeof args === "undefined") {
+          args = {};
+          args.loggerName = _name;
+        }
+
         _currentAppender.init(args, callback);
       },
 
@@ -262,7 +268,7 @@ var logger = (function(name, appender){
     var _args;
 
     var _sendMessage = function(text, color) {
-      var status = SP.UI.Status.addStatus(":", text);
+      var status = SP.UI.Status.addStatus(_args.name, text);
       SP.UI.Status.setStatusPriColor(status, color);
       setTimeout(function () { SP.UI.Status.removeStatus(status); }, _args.timeout);
     };

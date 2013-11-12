@@ -112,6 +112,12 @@ var logger = (function(name, appender){
 
       init : function(appender, args, callback) {
         _currentAppender = appender;
+
+        if(typeof args === "undefined") {
+          args = {};
+          args.loggerName = _name;
+        }
+
         _currentAppender.init(args, callback);
       },
 
