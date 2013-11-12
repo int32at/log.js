@@ -142,6 +142,8 @@ Following appenders are supported out of the box by `log.js`:
 - `logger.appender.alertAppender`: logs by using the browsers alert function.
 - `logger.appender.toastrAppender`: logs by using [toastr](https://github.com/CodeSeven/toastr).
 - `logger.appender.serviceAppender`: logs to a web service using POST.
+- `logger.appender.spStatusAppender`: logs using SharePoint's Status messages
+- `logger.appender.spNotifyAppender`: logs using SharePoint's Notification messages
 
 #####Using the serviceAppender
 The `logger.appender.serviceAppender` publishes all logged events to a web service using POST. jQuery is required for it
@@ -183,6 +185,66 @@ log.init(logger.appender.toastrAppender, toastrOptions, function() {
   //displays a nice toastr message
   log.error("this is an error message");
 });
+```
+
+#####Using the spStatusAppender
+This appender does not require jQuery or any other plugins. However, please be advised that it relies on the
+SharePoint JavaScript API (SP.UI.js) and therefore, make sure that this is loaded before calling any method of the logger.
+See following example:
+
+```js
+
+//make sure SP.js is loaded
+ExecuteOrDelayUntilScriptLoaded(function() {
+
+  //create custom sharepoint logger and initialize the status appender
+  //timeout is set so the status message will be displayed for 5 seconds
+  var sp = new logger("SP LOGGER");
+  sp.init(logger.appender.spStatusAppender, { timeout : 5000 });
+  
+  sp.error("ARGH");
+  
+}, "sp.js");
+
+```
+
+The `timeout` property is not needed - the timeout of status messages will be automatically set to 3000 (3 seconds)
+if you do not pass in any arguments. You will only need to set this property if you feel that the timeout is too short
+or too long.
+
+```js
+sp.init(logger.appender.spStatusAppender);
+
+//will display status message for 3 seconds
+sp.error("ANOTHER ERROR");
+```
+
+#####Using the spNotifyAppender
+This appender requires jQuery and as `logger.appender.spStatusAppender`, also SP.UI.js, so make sure everything is loaded 
+before executing any of the logger's methods.
+
+```js
+//make sure SP.js is loaded
+ExecuteOrDelayUntilScriptLoaded(function() {
+
+  //create custom sharepoint logger and initialize the status appender
+  //timeout is set so the status message will be displayed for 5 seconds
+  var sp = new logger("SP LOGGER");
+  sp.init(logger.appender.spNotifyAppender, { timeout : 5000 });
+  
+  sp.error("ARGH");
+  
+}, "sp.js");
+```
+
+The `timeout` property behaves the same as for `spStatusAppender` but additionally you can pass in the `colored` property
+which will color your notification messages just as the status messages! Use it like this:
+
+```js
+sp.init(logger.appender.spNotifyAppender, { colored : true });
+
+//will display a red message
+sp.error("ARGH");
 ```
 
 #####Creating a custom appender
