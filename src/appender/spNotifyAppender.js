@@ -10,7 +10,7 @@
       var notify = SP.UI.Notify.addNotification(text);
 
       if(_args.colored) {
-        $(".ms-trcnoti-toast").css("background-color", color);
+        $("#" + notify).css("background-color", color);
       }
 
       setTimeout(function () { SP.UI.Notify.removeNotification(notify) }, _args.timeout);
