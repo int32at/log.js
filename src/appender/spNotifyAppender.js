@@ -6,9 +6,13 @@
     
     var _args;
 
-    var _sendMessage = function(text) {
+    var _sendMessage = function(text, color) {
       var notify = SP.UI.Notify.addNotification(text);
-      $(".ms-trcnoti-toast").css("background-color", "#000");
+
+      if(typeof _args.colored === "undefined") {
+        $(".ms-trcnoti-toast").css("background-color", color);
+      }
+
       setTimeout(function () { SP.UI.Notify.removeNotification(notify) }, _args.timeout);
     };
 
@@ -24,23 +28,23 @@
       },
 
       log : function(text) {
-        _sendMessage(text);
+        _sendMessage(text, "#FFF");
       },
 
       info : function(text) {
-        _sendMessage(text);
+        _sendMessage(text, "#00AAFF");
       },
 
       warn : function(text) {
-        _sendMessage(text);
+        _sendMessage(text, "#FFBB00");
       },
 
       error : function(text) {
-        _sendMessage(text);
+        _sendMessage(text, "#FF0000");
       },
 
       debug : function(text) {
-        _sendMessage(text);
+        _sendMessage(text, "#FFF");
       }
     };
   }();
