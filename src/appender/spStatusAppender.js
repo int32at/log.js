@@ -6,7 +6,7 @@
     
     var _args;
 
-    var _sendMessage = function(level, text, color) {
+    var _sendMessage = function(text, color) {
       var status = SP.UI.Status.addStatus(":", text);
       SP.UI.Status.setStatusPriColor(status, color);
       setTimeout(function () { SP.UI.Status.removeStatus(status); }, _args.timeout);
@@ -21,7 +21,7 @@
           _args = {};
 
         if(typeof _args.timeout === "undefined")
-          _args.timeout = 5000; //5 sec
+          _args.timeout = 3000; //3 sec
       },
 
       log : function(text) {
