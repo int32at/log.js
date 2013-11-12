@@ -6,8 +6,8 @@ A JavaScript Logging Framework
 [![Build Status](https://travis-ci.org/int32at/log.js.png?branch=master)](https://travis-ci.org/int32at/log.js)
 
 ###Introduction
-`log.js` is a simple, easy to use and lightweight (3.5KB minified) logging framework for JavaScript. It includes several
-appenders that you can use right away. Check out this [fiddle](http://jsfiddle.net/BF3qh/1/) to see it in action!
+`log.js` is a simple, easy to use and lightweight (5KB minified) logging framework for JavaScript. It includes several
+appenders that you can use right away. Check out this [fiddle](http://jsfiddle.net/BF3qh/2/) to see it in action!
 
 ###Installation & Build
 1.  Install node.js
