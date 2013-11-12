@@ -4,8 +4,7 @@
   
   logger.appender.serviceAppender = function() {
     
-    var self = this;
-    self.args = undefined;
+    var _args;
 
     var send = function(text) {
       var jqxhr = $.post(self.args.url, { log_text : text })
@@ -22,7 +21,7 @@
     return {
 
       init : function(args) {
-        self.args = args;
+        _args = args;
       },
 
       log : function(text) {

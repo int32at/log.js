@@ -12,21 +12,8 @@ var logger = (function(name, appender){
                         { id: 4, name : "WARN"},
                         { id: 5, name : "ERROR"}
                       ];
-                      
-    var _common = function() {
 
-      var _executeFunctionByName = function(callback, context/*, args*/) {
-        var args = null;
-        if (arguments.length == 3) args = arguments[2];
-        var namespaces = callback.split(".");
-        var func = namespaces.pop();
-        for (var i = 0; i < namespaces.length; i++) {
-            context = context[namespaces[i]];
-        }
-        var params = [];
-        params.push(args);
-        return context[func].apply(context, params);
-      };
+    var _common = function() {
 
       return {
         executeCallback : function(callback) {
@@ -36,9 +23,6 @@ var logger = (function(name, appender){
               var params = [];
               params.push(args);
               callback.apply(this, params);
-          } else {
-              if (typeof callback !== "undefined" && callback.length > 0)
-              executeFunctionByName(callback, window, args);
           }
         },
 
@@ -108,7 +92,6 @@ var logger = (function(name, appender){
     return {
       //properties
       common : _common,
-      appender : _currentAppender,
       name : _name,
       format : function(newFormat) {
         if(typeof newFormat !== "undefined") {

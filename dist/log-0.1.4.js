@@ -12,21 +12,8 @@ var logger = (function(name, appender){
                         { id: 4, name : "WARN"},
                         { id: 5, name : "ERROR"}
                       ];
-                      
-    var _common = function() {
 
-      var _executeFunctionByName = function(callback, context/*, args*/) {
-        var args = null;
-        if (arguments.length == 3) args = arguments[2];
-        var namespaces = callback.split(".");
-        var func = namespaces.pop();
-        for (var i = 0; i < namespaces.length; i++) {
-            context = context[namespaces[i]];
-        }
-        var params = [];
-        params.push(args);
-        return context[func].apply(context, params);
-      };
+    var _common = function() {
 
       return {
         executeCallback : function(callback) {
@@ -36,9 +23,6 @@ var logger = (function(name, appender){
               var params = [];
               params.push(args);
               callback.apply(this, params);
-          } else {
-              if (typeof callback !== "undefined" && callback.length > 0)
-              executeFunctionByName(callback, window, args);
           }
         },
 
@@ -108,7 +92,6 @@ var logger = (function(name, appender){
     return {
       //properties
       common : _common,
-      appender : _currentAppender,
       name : _name,
       format : function(newFormat) {
         if(typeof newFormat !== "undefined") {
@@ -151,18 +134,17 @@ var logger = (function(name, appender){
     };
 });
 (function() {
-  logger = window.logger || {}; 
+  logger = window.logger || {};
   logger.appender = logger.appender || {};
   
   logger.appender.alertAppender = function() {
     
-    var self = this;
-    self.args = undefined;
+    var _args;
 
     return {
 
       init : function(args) {
-        self.args = args;
+        _args = args;
       },
 
       log : function(text) {
@@ -188,18 +170,17 @@ var logger = (function(name, appender){
   }();
 }());
 (function() {
-  logger = window.logger || {}; 
+  logger = window.logger || {};
   logger.appender = logger.appender || {};
   
   logger.appender.consoleAppender = function() {
     
-    var self = this;
-    self.args = undefined;
+    var _args;
 
     return {
 
       init : function(args) {
-        self.args = args;
+        _args = args;
       },
 
       log : function(text) {
@@ -230,8 +211,7 @@ var logger = (function(name, appender){
   
   logger.appender.serviceAppender = function() {
     
-    var self = this;
-    self.args = undefined;
+    var _args;
 
     var send = function(text) {
       var jqxhr = $.post(self.args.url, { log_text : text })
@@ -248,7 +228,7 @@ var logger = (function(name, appender){
     return {
 
       init : function(args) {
-        self.args = args;
+        _args = args;
       },
 
       log : function(text) {
@@ -277,38 +257,55 @@ var logger = (function(name, appender){
   logger = window.logger || {};
   logger.appender = logger.appender || {};
   
-  logger.appender.toastrAppender = function() {
+  logger.appender.spStatusAppender = function() {
     
-    var self = this;
-    self.args = undefined;
+    var _args;
 
-    var loadResource = function(type, url) {
-      var head = document.getElementsByTagName("head")[0];
+    return {
 
-      var element = document.createElement(type);
+      init : function(args) {
+        _args = args;
+      },
 
-      if(type === "script") {
-        element.src = url;
-        element.type = "text/javascript";
+      log : function(text) {
+        alert(text);
+      },
+
+      info : function(text) {
+        alert(text);
+      },
+
+      warn : function(text) {
+        alert(text);
+      },
+
+      error : function(text) {
+        alert(text);
+      },
+
+      debug : function(text) {
+        alert(text);
       }
-      if(type === "link") {
-        element.href = url;
-        element.type = "text/css";
-        element.rel = "stylesheet";
-      }
-
-      head.appendChild(element);
     };
+  }();
+}());
+(function() {
+  logger = window.logger || {};
+  logger.appender = logger.appender || {};
+  
+  logger.appender.toastrAppender = function() {
+  
+    var _args;
 
     return {
 
       init : function(args, callback) {
-        self.args = args;
+        _args = args;
 
-        loadResource("link", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.min.css");
+        log.common.loadResource("link", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.min.css");
 
         $.getScript("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.min.js", function() {
-          toastr.options = self.args;
+          toastr.options = _args;
           log.common.executeCallback(callback);
         });
       },

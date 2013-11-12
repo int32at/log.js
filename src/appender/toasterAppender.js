@@ -3,37 +3,18 @@
   logger.appender = logger.appender || {};
   
   logger.appender.toastrAppender = function() {
-    
-    var self = this;
-    self.args = undefined;
-
-    var loadResource = function(type, url) {
-      var head = document.getElementsByTagName("head")[0];
-
-      var element = document.createElement(type);
-
-      if(type === "script") {
-        element.src = url;
-        element.type = "text/javascript";
-      }
-      if(type === "link") {
-        element.href = url;
-        element.type = "text/css";
-        element.rel = "stylesheet";
-      }
-
-      head.appendChild(element);
-    };
+  
+    var _args;
 
     return {
 
       init : function(args, callback) {
-        self.args = args;
+        _args = args;
 
-        loadResource("link", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.min.css");
+        log.common.loadResource("link", "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.min.css");
 
         $.getScript("https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.min.js", function() {
-          toastr.options = self.args;
+          toastr.options = _args;
           log.common.executeCallback(callback);
         });
       },

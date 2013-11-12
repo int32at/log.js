@@ -1,16 +1,15 @@
 (function() {
-  logger = window.logger || {}; 
+  logger = window.logger || {};
   logger.appender = logger.appender || {};
   
   logger.appender.consoleAppender = function() {
     
-    var self = this;
-    self.args = undefined;
+    var _args;
 
     return {
 
       init : function(args) {
-        self.args = args;
+        _args = args;
       },
 
       log : function(text) {

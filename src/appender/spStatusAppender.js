@@ -2,7 +2,7 @@
   logger = window.logger || {};
   logger.appender = logger.appender || {};
   
-  logger.appender.alertAppender = function() {
+  logger.appender.spStatusAppender = function() {
     
     var _args;
 
