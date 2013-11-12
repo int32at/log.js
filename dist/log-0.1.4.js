@@ -268,7 +268,7 @@ var logger = (function(name, appender){
     var _sendMessage = function(text, color) {
       var notify = SP.UI.Notify.addNotification(text);
 
-      if(typeof _args.colored === "undefined") {
+      if(_args.colored) {
         $(".ms-trcnoti-toast").css("background-color", color);
       }
 
