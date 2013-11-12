@@ -8,6 +8,7 @@
 
     var _sendMessage = function(text) {
       var notify = SP.UI.Notify.addNotification(text);
+      $(".ms-trcnoti-toast").css("background-color", "#000");
       setTimeout(function () { SP.UI.Notify.removeNotification(notify) }, _args.timeout);
     };
 
