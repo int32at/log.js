@@ -113,10 +113,8 @@ var logger = (function(name, appender){
       init : function(appender, args, callback) {
         _currentAppender = appender;
 
-        if(typeof args === "undefined") {
-          args = {};
-          args.loggerName = _name;
-        }
+        args = args || {};
+        args.loggerName = _name;
 
         _currentAppender.init(args, callback);
       },
@@ -278,8 +276,7 @@ var logger = (function(name, appender){
       init : function(args) {
         _args = args;
 
-        if(typeof _args === "undefined")
-          _args = {};
+        _args = _args || {};
 
         if(typeof _args.timeout === "undefined")
           _args.timeout = 3000; //3 sec

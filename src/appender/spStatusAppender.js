@@ -17,8 +17,7 @@
       init : function(args) {
         _args = args;
 
-        if(typeof _args === "undefined")
-          _args = {};
+        _args = _args || {};
 
         if(typeof _args.timeout === "undefined")
           _args.timeout = 3000; //3 sec
