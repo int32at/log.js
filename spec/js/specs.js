@@ -43,6 +43,33 @@
 }).call(this);
 
 (function() {
+  describe('alertAppender specs', function() {
+    beforeEach(function() {
+      window.oldalert = alert;
+      window.alert = jasmine.createSpy();
+      this.alertLogger = new logger("Alert Logger");
+      this.alertLogger.init("alertAppender");
+    });
+    afterEach(function() {
+      return window.alert = window.oldalert;
+    });
+    return it('should be possible to write log messages to alert window', function() {
+      this.alertLogger.debug("message");
+      this.alertLogger.info("message1");
+      this.alertLogger.log("message2");
+      this.alertLogger.warn("message3");
+      this.alertLogger.error("message4");
+      expect(window.alert).toHaveBeenCalledWith("message");
+      expect(window.alert).toHaveBeenCalledWith("message1");
+      expect(window.alert).toHaveBeenCalledWith("message2");
+      expect(window.alert).toHaveBeenCalledWith("message3");
+      return expect(window.alert).toHaveBeenCalledWith("message4");
+    });
+  });
+
+}).call(this);
+
+(function() {
   describe('consoleAppender specs', function() {
     beforeEach(function() {
       this.name = "My Logger";

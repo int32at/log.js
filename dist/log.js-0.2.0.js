@@ -50,6 +50,48 @@
 }).call(this);
 
 (function() {
+  window.logger.alertAppender = (function() {
+    var args, name;
+
+    function alertAppender() {}
+
+    name = "alertAppender";
+
+    args = null;
+
+    alertAppender.prototype.name = (function() {
+      return name;
+    })();
+
+    alertAppender.prototype.init = function(args) {};
+
+    alertAppender.prototype.log = function(text) {
+      return alert(text);
+    };
+
+    alertAppender.prototype.info = function(text) {
+      return alert(text);
+    };
+
+    alertAppender.prototype.debug = function(text) {
+      return alert(text);
+    };
+
+    alertAppender.prototype.warn = function(text) {
+      return alert(text);
+    };
+
+    alertAppender.prototype.error = function(text) {
+      return alert(text);
+    };
+
+    return alertAppender;
+
+  })();
+
+}).call(this);
+
+(function() {
   window.logger.consoleAppender = (function() {
     var _args, _name;
 
