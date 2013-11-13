@@ -9,6 +9,7 @@ describe 'logger.coffee specs', ->
       @name = "My Logger"
       @format =  "[{date}][{level}] {text}"
       @myLogger = new logger @name
+      @myLogger.init()
 
     it 'should be possible to instance a new logger object', ->
       expect(@myLogger).not.toBeUndefined()
@@ -36,6 +37,3 @@ describe 'logger.coffee specs', ->
 
     it 'should be possible to call the init method without parameters (does not do anything)', ->
       expect(@myLogger.init.bind()).not.toThrow()
-
-    # it 'should be possible to set the appender to consoleAppender', ->
-    #   expect(@myLogger.init.bind(null, "consoleAppender")).toThrow()

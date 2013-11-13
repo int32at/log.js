@@ -1,4 +1,22 @@
 (function() {
+  describe('consoleAppender specs', function() {
+    beforeEach(function() {
+      this.name = "My Logger";
+      this.consoleLogger = new logger(this.name);
+      return this.consoleLogger.init("consoleAppender");
+    });
+    return it('should be possible to write log messages to the console', function() {
+      this.consoleLogger.debug(this.consoleLogger.name);
+      this.consoleLogger.info(this.consoleLogger.name);
+      this.consoleLogger.log(this.consoleLogger.name);
+      this.consoleLogger.warn(this.consoleLogger.name);
+      return this.consoleLogger.error(this.consoleLogger.name);
+    });
+  });
+
+}).call(this);
+
+(function() {
   describe('logger.coffee specs', function() {
     it('should be possible to use the logger object', function() {
       return expect(logger).not.toBeUndefined();
@@ -7,7 +25,8 @@
       beforeEach(function() {
         this.name = "My Logger";
         this.format = "[{date}][{level}] {text}";
-        return this.myLogger = new logger(this.name);
+        this.myLogger = new logger(this.name);
+        return this.myLogger.init();
       });
       it('should be possible to instance a new logger object', function() {
         return expect(this.myLogger).not.toBeUndefined();
