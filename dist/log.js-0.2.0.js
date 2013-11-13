@@ -15,9 +15,11 @@
     })();
 
     logger.prototype.init = function(appender, args, callback) {
-      this._appender = new logger.appender[appender];
-      if (this._appender) {
-        return this._appender.init(args, callback);
+      if (appender) {
+        this._appender = new logger.appender[appender];
+        if (this._appender) {
+          return this._appender.init(args, callback);
+        }
       }
     };
 

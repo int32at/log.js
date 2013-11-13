@@ -7,9 +7,10 @@ class window.logger
   format: (-> return _format)()
 
   init: (appender, args, callback) -> 
-    @_appender = new logger.appender[appender]
-    if @_appender
-      @_appender.init(args, callback);
+    if appender
+      @_appender = new logger.appender[appender]
+      if @_appender
+        @_appender.init(args, callback);
 
   log: (text) ->
     @_appender.log(text);
