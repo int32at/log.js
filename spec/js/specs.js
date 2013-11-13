@@ -1,22 +1,4 @@
 (function() {
-  describe('consoleAppender specs', function() {
-    beforeEach(function() {
-      this.name = "My Logger";
-      this.consoleLogger = new logger(this.name);
-      return this.consoleLogger.init("consoleAppender");
-    });
-    return it('should be possible to write log messages to the console', function() {
-      this.consoleLogger.debug(this.consoleLogger.name);
-      this.consoleLogger.info(this.consoleLogger.name);
-      this.consoleLogger.log(this.consoleLogger.name);
-      this.consoleLogger.warn(this.consoleLogger.name);
-      return this.consoleLogger.error(this.consoleLogger.name);
-    });
-  });
-
-}).call(this);
-
-(function() {
   describe('logger.coffee specs', function() {
     it('should be possible to use the logger object', function() {
       return expect(logger).not.toBeUndefined();
@@ -55,6 +37,24 @@
       return it('should be possible to call the init method without parameters (does not do anything)', function() {
         return expect(this.myLogger.init.bind()).not.toThrow();
       });
+    });
+  });
+
+}).call(this);
+
+(function() {
+  describe('consoleAppender specs', function() {
+    beforeEach(function() {
+      this.name = "My Logger";
+      this.consoleLogger = new logger(this.name);
+      return this.consoleLogger.init("consoleAppender");
+    });
+    return it('should be possible to write log messages to the console', function() {
+      this.consoleLogger.debug(this.consoleLogger.name);
+      this.consoleLogger.info(this.consoleLogger.name);
+      this.consoleLogger.log(this.consoleLogger.name);
+      this.consoleLogger.warn(this.consoleLogger.name);
+      return this.consoleLogger.error(this.consoleLogger.name);
     });
   });
 
