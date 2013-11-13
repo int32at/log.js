@@ -1,4 +1,0 @@
-[11/10/2013 8:05:55 PM][INFO] this is a sample message
-[11/10/2013 8:07:32 PM][INFO] this is a sample message
-[11/10/2013 8:07:35 PM][WARN] Text message
-[11/10/2013 8:07:43 PM][INFO] this is a sample message
