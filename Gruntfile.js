@@ -42,5 +42,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-coffee");
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  
+  grunt.registerTask("test", ["jasmine"]);
   grunt.registerTask("default", ["coffee", "uglify", "jasmine"]);
 };
