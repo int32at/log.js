@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     coffee: {
       compile: {
         files: {
-          "dist/<%= pkg.name %>-<%= pkg.version %>.js": ["src/logger.coffee"],
+          "dist/<%= pkg.name %>-<%= pkg.version %>.js": ["src/logger.coffee", "src/*/*.coffee"],
           'spec/js/specs.js' : 'spec/*Spec.coffee'
         }
       }

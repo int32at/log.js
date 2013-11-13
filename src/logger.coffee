@@ -8,7 +8,7 @@ class window.logger
 
   init: (appender, args, callback) -> 
     if appender
-      @_appender = new logger.appender[appender]
+      @_appender = new logger[appender]
       if @_appender
         @_appender.init(args, callback);
 
