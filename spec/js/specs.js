@@ -95,16 +95,13 @@
 
 (function() {
   describe('toastrAppender specs', function() {
-    var async;
-    async = new AsyncSpec(this);
     beforeEach(function() {
       this.name = "My Toastr";
       this.toastrLogger = new logger(this.name);
     });
     return it("should should reference toastr when the init method is called", function() {
       return this.toastrLogger.init("toastrAppender", null, function() {
-        expect(toastr).not.toBeUndefined();
-        return done();
+        return expect(toastr).not.toBeUndefined();
       });
     });
   });
