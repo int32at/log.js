@@ -24,19 +24,26 @@ module.exports = function(grunt) {
     },
 
     jasmine: {
-      pivotal: {
+      coverage: {
         src: 'dist/<%= pkg.name %>-<%= pkg.version %>.js',
         options: {
+          specs: 'spec/js/specs.js',
           vendor: 'lib/*.js',
           keepRunner: true,
-          specs: 'spec/js/specs.js',
-          '--web-security' : false,
-          '--local-to-remote-url-access' : true,
-          '--ignore-ssl-errors' : true
+          template: require('grunt-template-jasmine-istanbul'),
+          templateOptions: {
+            coverage: 'coverage/coverage.json',
+            report: 'coverage',
+            thresholds: {
+              lines: 5,
+              statements: 5,
+              branches: 5,
+              functions: 5
+            }
+          }
         }
       }
     }
-
   });
 
   grunt.loadNpmTasks("grunt-contrib-coffee");

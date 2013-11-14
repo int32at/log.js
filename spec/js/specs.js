@@ -110,11 +110,11 @@
         spyOn(toastr, "info");
         spyOn(toastr, "warning");
         spyOn(toastr, "error");
-        toastrLogger.debug(window.toastrLogger.name);
-        toastrLogger.info(window.toastrLogger.name);
-        toastrLogger.log(window.toastrLogger.name);
-        toastrLogger.warn(window.toastrLogger.name);
-        toastrLogger.error(window.toastrLogger.name);
+        window.toastrLogger.debug(window.toastrLogger.name);
+        window.toastrLogger.info(window.toastrLogger.name);
+        window.toastrLogger.log(window.toastrLogger.name);
+        window.toastrLogger.warn(window.toastrLogger.name);
+        window.toastrLogger.error(window.toastrLogger.name);
         expect(toastr.info).toHaveBeenCalled();
         expect(toastr.warning).toHaveBeenCalled();
         return expect(toastr.error).toHaveBeenCalled();
