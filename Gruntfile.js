@@ -35,10 +35,10 @@ module.exports = function(grunt) {
             coverage: 'coverage/coverage.json',
             report: 'coverage',
             thresholds: {
-              lines: 5,
-              statements: 5,
-              branches: 5,
-              functions: 5
+              lines: 50,
+              statements: 50,
+              branches: 50,
+              functions: 50
             }
           }
         }
