@@ -97,11 +97,27 @@
   describe('toastrAppender specs', function() {
     beforeEach(function() {
       this.name = "My Toastr";
-      this.toastrLogger = new logger(this.name);
+      window.toastrLogger = new logger(this.name);
     });
-    return it("should should reference toastr when the init method is called", function() {
-      return this.toastrLogger.init("toastrAppender", null, function() {
+    it("should should reference toastr when the init method is called", function() {
+      return window.toastrLogger.init("toastrAppender", null, function() {
+        window.toastr = toastr;
         return expect(toastr).not.toBeUndefined();
+      });
+    });
+    return it('should be possible to write log messages to toastr', function() {
+      return window.toastrLogger.init("toastrAppender", null, function() {
+        spyOn(toastr, "info");
+        spyOn(toastr, "warning");
+        spyOn(toastr, "error");
+        toastrLogger.debug(window.toastrLogger.name);
+        toastrLogger.info(window.toastrLogger.name);
+        toastrLogger.log(window.toastrLogger.name);
+        toastrLogger.warn(window.toastrLogger.name);
+        toastrLogger.error(window.toastrLogger.name);
+        expect(toastr.info).toHaveBeenCalled();
+        expect(toastr.warning).toHaveBeenCalled();
+        return expect(toastr.error).toHaveBeenCalled();
       });
     });
   });

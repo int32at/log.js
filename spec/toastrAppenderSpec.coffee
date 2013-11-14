@@ -2,9 +2,27 @@ describe 'toastrAppender specs', ->
   
   beforeEach ->
     @name = "My Toastr"
-    @toastrLogger = new logger @name
+    window.toastrLogger = new logger @name
     return
 
   it "should should reference toastr when the init method is called", ->
-    @toastrLogger.init "toastrAppender", null, ->
+    window.toastrLogger.init "toastrAppender", null, ->
+      window.toastr = toastr
       expect(toastr).not.toBeUndefined()
+
+  it 'should be possible to write log messages to toastr', ->
+
+    window.toastrLogger.init "toastrAppender", null, ->
+      spyOn(toastr, "info");
+      spyOn(toastr, "warning");
+      spyOn(toastr, "error");
+
+      toastrLogger.debug(window.toastrLogger.name);
+      toastrLogger.info(window.toastrLogger.name);
+      toastrLogger.log(window.toastrLogger.name);
+      toastrLogger.warn(window.toastrLogger.name);
+      toastrLogger.error(window.toastrLogger.name);
+
+      expect(toastr.info).toHaveBeenCalled()
+      expect(toastr.warning).toHaveBeenCalled()
+      expect(toastr.error).toHaveBeenCalled()
