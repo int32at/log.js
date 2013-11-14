@@ -7,13 +7,13 @@ class window.logger.consoleAppender
   init: (args) ->
     _args = args;
   log: (text) ->
-    console.log text
+    window.console.log text
 
   info: (text) ->
     console.info text
 
   debug: (text) ->
-    console.debug text
+    window.console.debug text
 
   warn: (text) ->
     console.warn text

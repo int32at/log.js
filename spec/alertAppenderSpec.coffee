@@ -1,15 +1,10 @@
 describe 'alertAppender specs', ->
-	# alert = null
 
   beforeEach ->
-    window.oldalert = alert #lert = jasmine.createSpy()
-    window.alert = jasmine.createSpy()
     @alertLogger = new logger "Alert Logger"
     @alertLogger.init("alertAppender")
+    spyOn(window, "alert");
     return
-
-   afterEach ->
-   	window.alert = window.oldalert
 
   it 'should be possible to write log messages to alert window', ->
   	@alertLogger.debug("message")

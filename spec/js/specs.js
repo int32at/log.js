@@ -45,13 +45,9 @@
 (function() {
   describe('alertAppender specs', function() {
     beforeEach(function() {
-      window.oldalert = alert;
-      window.alert = jasmine.createSpy();
       this.alertLogger = new logger("Alert Logger");
       this.alertLogger.init("alertAppender");
-    });
-    afterEach(function() {
-      return window.alert = window.oldalert;
+      spyOn(window, "alert");
     });
     return it('should be possible to write log messages to alert window', function() {
       this.alertLogger.debug("message");
@@ -74,14 +70,42 @@
     beforeEach(function() {
       this.name = "My Logger";
       this.consoleLogger = new logger(this.name);
-      return this.consoleLogger.init("consoleAppender");
+      this.consoleLogger.init("consoleAppender");
+      spyOn(console, "debug");
+      spyOn(console, "info");
+      spyOn(console, "log");
+      spyOn(console, "warn");
+      spyOn(console, "error");
     });
     return it('should be possible to write log messages to the console', function() {
       this.consoleLogger.debug(this.consoleLogger.name);
       this.consoleLogger.info(this.consoleLogger.name);
       this.consoleLogger.log(this.consoleLogger.name);
       this.consoleLogger.warn(this.consoleLogger.name);
-      return this.consoleLogger.error(this.consoleLogger.name);
+      this.consoleLogger.error(this.consoleLogger.name);
+      expect(console.debug).toHaveBeenCalled();
+      expect(console.info).toHaveBeenCalled();
+      expect(console.log).toHaveBeenCalled();
+      expect(console.warn).toHaveBeenCalled();
+      return expect(console.error).toHaveBeenCalled();
+    });
+  });
+
+}).call(this);
+
+(function() {
+  describe('toastrAppender specs', function() {
+    var async;
+    async = new AsyncSpec(this);
+    beforeEach(function() {
+      this.name = "My Toastr";
+      this.toastrLogger = new logger(this.name);
+    });
+    return it("should should reference toastr when the init method is called", function() {
+      return this.toastrLogger.init("toastrAppender", null, function() {
+        expect(toastr).not.toBeUndefined();
+        return done();
+      });
     });
   });
 

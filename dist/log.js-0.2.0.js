@@ -50,6 +50,23 @@
 }).call(this);
 
 (function() {
+  window.logger.common = (function() {
+    return {
+      insertStyleSheet: function(url) {
+        var element, head;
+        head = document.getElementsByTagName("head")[0];
+        element = document.createElement("link");
+        element.href = url;
+        element.type = "text/css";
+        element.rel = "stylesheet";
+        head.appendChild(element);
+      }
+    };
+  })();
+
+}).call(this);
+
+(function() {
   window.logger.alertAppender = (function() {
     var args, name;
 
@@ -110,7 +127,7 @@
     };
 
     consoleAppender.prototype.log = function(text) {
-      return console.log(text);
+      return window.console.log(text);
     };
 
     consoleAppender.prototype.info = function(text) {
@@ -118,7 +135,7 @@
     };
 
     consoleAppender.prototype.debug = function(text) {
-      return console.debug(text);
+      return window.console.debug(text);
     };
 
     consoleAppender.prototype.warn = function(text) {
@@ -130,6 +147,56 @@
     };
 
     return consoleAppender;
+
+  })();
+
+}).call(this);
+
+(function() {
+  window.logger.toastrAppender = (function() {
+    var args, name;
+
+    function toastrAppender() {}
+
+    name = "toastrAppender";
+
+    args = null;
+
+    toastrAppender.prototype.name = (function() {
+      return name;
+    })();
+
+    toastrAppender.prototype.init = function(args, callback) {
+      jQuery(function() {});
+      logger.common.insertStyleSheet("//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.min.css");
+      return $.getScript("//cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.min.js", function() {
+        if (callback) {
+          callback();
+        }
+      });
+    };
+
+    toastrAppender.prototype.log = function(text) {
+      return toastr.info(text);
+    };
+
+    toastrAppender.prototype.info = function(text) {
+      return toastr.info(text);
+    };
+
+    toastrAppender.prototype.debug = function(text) {
+      return toastr.info(text);
+    };
+
+    toastrAppender.prototype.warn = function(text) {
+      return toastr.warning(text);
+    };
+
+    toastrAppender.prototype.error = function(text) {
+      return toastr.error(text);
+    };
+
+    return toastrAppender;
 
   })();
 
